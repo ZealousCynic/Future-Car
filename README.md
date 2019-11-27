@@ -7,7 +7,7 @@ Project for datatecnician H3-4
     
 - [ ] Angular SPA
 
-   - [] Unit tests
+   - [ ] Unit tests
     
 - [ ] Arduino
 
