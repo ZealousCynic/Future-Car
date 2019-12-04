@@ -1,5 +1,5 @@
 # Future-Car
-Project for datatecnician H3-4
+Project for datatechnician H3-4
 
 Hovedansvarlig: **H4**
 - [ ] Android App
@@ -18,13 +18,15 @@ Hovedansvarlig: **H3**
     - [ ] Secure login **H4**
     - [ ] Routing
     - [ ] Unit tests
-    
+
+Hovedansvarlig: **H3**
 - [ ] Arduino
 
     - [ ] One or more sensors
-    - [ ] Web Socket
+    - [ ] Web Socket **H4**
     - You don't unit test code for embedded controllers
 
+**Everybody**
 - [ ] Backend
     
     - [ ] Web API
