@@ -20,6 +20,7 @@ Project for datatecnician H3-4
 - [ ] Arduino
 
     - [ ] One or more sensors
+    - [ ] Web Socket
     - You don't unit test code for embedded controllers
 
 - [ ] Backend
