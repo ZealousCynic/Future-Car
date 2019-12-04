@@ -1,8 +1,9 @@
 # Future-Car
 Project for datatecnician H3-4
 
+Hovedansvarlig: **H4**
 - [ ] Android App
-
+    
     - Which parts can be individually singled out and marked as done?
     - [ ] List
     - [ ] Button
@@ -10,10 +11,11 @@ Project for datatecnician H3-4
     - [ ] Web Socket
     - [ ] Unit test
     
+Hovedansvarlig: **H3**
 - [ ] Angular SPA
-
+    
     - [ ] Form
-    - [ ] Secure login
+    - [ ] Secure login **H4**
     - [ ] Routing
     - [ ] Unit tests
     
