@@ -26,7 +26,7 @@ Hovedansvarlig: **H3**
     - [ ] Web Socket **H4**
     - You don't unit test code for embedded controllers
 
-**Everybody**
+Hovedansvarlig: **Everybody**
 - [ ] Backend
     
     - [ ] Web API
