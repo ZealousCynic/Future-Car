@@ -1,100 +1,128 @@
-CREATE TABLE [VortexRegistration] (
-  [VortexId] int,
-  [Registration] Varchar(8)
-);
+USE Master;
+GO
+BEGIN
+CREATE DATABASE VortexDB;
+END
+GO
+BEGIN
+USE VortexDB;
+END
+GO
+	CREATE TABLE [Vortex] (
+		[VortexId] INT NOT NULL,
+		[SerialNumber] VARCHAR(32),
+		[Model] VARCHAR(64),
+		PRIMARY KEY ([VortexId])
+	);
+	
+	CREATE TABLE [User] (
+	  [UserId] INT NOT NULL,
+	  [Username] VARCHAR(128) NOT NULL,
+	  [Password] VARCHAR(128) NOT NULL,
+	  PRIMARY KEY ([UserId])
+	);
 
-CREATE INDEX [PK, FK] ON  [VortexRegistration] ([VortexId]);
+	CREATE TABLE [Owner] (
+	  [Id] INT NOT NULL,
+	  [FirstName] VARCHAR(64) NOT NULL,
+	  [LastName] VARCHAR(64),
+	  PRIMARY KEY ([Id])
+	);
+GO
 
-CREATE TABLE [User] (
-  [UserId] int,
-  [Username] Varchar(),
-  [Password] Varchar(),
-  PRIMARY KEY User(UserId)
-);
+	CREATE TABLE [VortexRegistration] (
+		[VortexId] INT NOT NULL,
+		[Registration] VARCHAR(8)
+		FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+		ON DELETE CASCADE 
+		ON UPDATE CASCADE,
+		CONSTRAINT PK_VortexId PRIMARY KEY(VortexId)
+	);
 
-CREATE TABLE [Vortex] (
-  [VortexId] int,
-  [SerialNumber] Varchar(32),
-  [Model] Varchar(64),
-  PRIMARY KEY ([VortexId])
-);
+	CREATE TABLE [PowerLog] (
+	  [VortexId] INT NOT NULL,
+	  [Time] DATETIME NOT NULL,
+	  [Power] BIT NULL,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_Time  PRIMARY KEY ([Time], VortexId)
+	);
 
-CREATE TABLE [PowerLog] (
-  [VortexId] int,
-  [Time] datetime,
-  [Power] bit,
-  PRIMARY KEY ([Time])
-);
+	CREATE TABLE [VortexOwner] (
+	  [VortexId] INT NOT NULL,
+	  [OwnerId] INT NOT NULL
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  FOREIGN KEY (OwnerId) REFERENCES Owner(Id)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_OwnerId PRIMARY KEY (VortexId, OwnerId)
+	);
 
-CREATE INDEX [PK, FK] ON  [PowerLog] ([VortexId]);
+	CREATE TABLE [StateLog] (
+	  [VortexId] INT NOT NULL,
+	  [Time] DATETIME NOT NULL,
+	  [State] BIT,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_Time_StateLog PRIMARY KEY (VortexId, [Time])
+	);
 
-CREATE TABLE [Owner] (
-  [Id] int,
-  [FirstName] Varchar(64),
-  [LastName] Varchar(64),
-  PRIMARY KEY ([Id])
-);
+	CREATE TABLE [SessionKeys] (
+	  [UserId] INT NOT NULL,
+	  [VortexId] INT NOT NULL,
+	  [SessionKey] INT NOT NULL
+	  FOREIGN KEY (UserId) REFERENCES [User](UserId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_UserId_VortexId_SesKey PRIMARY KEY (UserId, VortexId)
+	);
 
-CREATE TABLE [VortexOwner] (
-  [VortexId] int,
-  [OwnerId] Int
-);
+	CREATE TABLE [WaterLevel] (
+	  [VortexId] INT NOT NULL,
+	  [Time] DATETIME NOT NULL,
+	  [WaterLevelReading] SMALLINT NOT NULL,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_Time_WLevel PRIMARY KEY (VortexId, [Time])
+	);
 
-CREATE INDEX [PK, FK] ON  [VortexOwner] ([VortexId]);
+	CREATE TABLE [Temperature] (
+	  [VortexId] INT NOT NULL,
+	  [Time] DATETIME NOT NULL,
+	  [Temperature] SMALLINT NOT NULL,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_Time_Temp PRIMARY KEY (VortexId, [Time])	
+	  );
 
-CREATE INDEX [FK] ON  [VortexOwner] ([OwnerId]);
-
-CREATE TABLE [StateLog] (
-  [VortexId] int,
-  [Time] datetime,
-  [State] bit,
-  PRIMARY KEY ([Time])
-);
-
-CREATE INDEX [PK, FK] ON  [StateLog] ([VortexId]);
-
-CREATE TABLE [SessionKeys] (
-  [UserId] int,
-  [VortexId] Int,
-  [SessionKey] int
-);
-
-CREATE INDEX [PK, FK] ON  [SessionKeys] ([UserId]);
-
-CREATE INDEX [PF, FK] ON  [SessionKeys] ([VortexId]);
-
-CREATE TABLE [WaterLevel] (
-  [VortexId] int,
-  [Time] datetime,
-  [WaterLevelReading] smallint,
-  PRIMARY KEY ([Time])
-);
-
-CREATE INDEX [PK, FK] ON  [WaterLevel] ([VortexId]);
-
-CREATE TABLE [Temperature] (
-  [VortexId] int,
-  [Time] datetime,
-  [Temperature] smallint,
-  PRIMARY KEY ([Time])
-);
-
-CREATE INDEX [PK, FK] ON  [Temperature] ([VortexId]);
-
-CREATE TABLE [Compas] (
-  [VortexId] int,
-  [Time] datetime,
-  [CompasReading] smallint,
-  PRIMARY KEY ([Time])
-);
-
-CREATE INDEX [PK, FK] ON  [Compas] ([VortexId]);
-
-CREATE TABLE [VortexUser] (
-  [UserId] int,
-  [VortexId] Int
-);
-
-CREATE INDEX [PK, FK] ON  [VortexUser] ([UserId]);
-
-CREATE INDEX [PF, FK] ON  [VortexUser] ([VortexId]);
+	CREATE TABLE [Compas] (
+	  [VortexId] INT NOT NULL,
+	  [Time] DATETIME NOT NULL,
+	  [CompasReading] SMALLINT NOT NULL,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_VortexId_Time_Compas PRIMARY KEY (VortexId, [Time])
+	);
+	
+	CREATE TABLE [VortexUser] (
+	  [UserId] INT NOT NULL,
+	  [VortexId] INT NOT NULL
+	  FOREIGN KEY (UserId) REFERENCES [User](UserId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  FOREIGN KEY (VortexId) REFERENCES Vortex(VortexId)
+	  ON DELETE CASCADE
+	  ON UPDATE CASCADE,
+	  CONSTRAINT PK_UserId_VortexId_VUser PRIMARY KEY (VortexId, UserId)
+	);
+GO
