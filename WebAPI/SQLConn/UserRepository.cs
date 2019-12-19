@@ -28,6 +28,9 @@ namespace DAL
 
         public bool AuthenticateUser(User entity)
         {
+<<<<<<< HEAD
+            throw new NotImplementedException();
+=======
             CmdText = "AuthenticateUser";
             Cmd.Connection = Connection;
             Cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -49,6 +52,7 @@ namespace DAL
 
             Debug.WriteLine("Default false");
             return false;
+>>>>>>> 9003e6b56410fc0aace0e988a2e9b66889f69988
         }
 
         public override void Create(User entity)
