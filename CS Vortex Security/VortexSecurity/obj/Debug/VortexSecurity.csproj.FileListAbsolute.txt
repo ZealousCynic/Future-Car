@@ -1,0 +1,6 @@
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\bin\Debug\VortexSecurity.dll
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\bin\Debug\VortexSecurity.pdb
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\obj\Debug\VortexSecurity.csprojAssemblyReference.cache
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\obj\Debug\VortexSecurity.csproj.CoreCompileInputs.cache
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\obj\Debug\VortexSecurity.dll
+C:\GitRepo\Future-Car\CS Vortex Security\VortexSecurity\obj\Debug\VortexSecurity.pdb

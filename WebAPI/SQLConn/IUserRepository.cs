@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    interface IUserRepository
+    interface IUserRepository<T>
+        where T : BaseEntity
     {
-        bool AuthenticateUser(User u);
+        bool AuthenticateUser(T entity);
     }
 }
