@@ -1,4 +1,4 @@
-<mat-toolbar [style.display]="'none'">
+<mat-toolbar [style.display]="''">
     <button mat-icon-button>
         <mat-icon>apps</mat-icon>
     </button>
@@ -9,7 +9,7 @@
     </button>
     <span class="menu-spacer"></span>
     <div>
-        <a mat-button [routerLink]="'/'"> Oversigt </a>
+        <a mat-button [routerLink]="'/overview'"> Oversigt </a>
         <a mat-button [routerLink]="'/create-account'"> Tildel adgang </a>
         <button mat-button [matMenuTriggerFor]="menu"> Statistik <mat-icon>arrow_drop_down</mat-icon></button>
         <mat-menu #menu="matMenu">
