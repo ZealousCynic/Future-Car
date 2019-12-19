@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { OverviewComponent } from './components/overview/overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent
+    LogInComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
