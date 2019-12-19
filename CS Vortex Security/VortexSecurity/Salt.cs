@@ -11,7 +11,7 @@ namespace VortexSecurity
     /// <summary>
     /// Used to salt passwords before transmitting and storage
     /// </summary>
-    class Salt : IDisposable
+    public class Salt : IDisposable
     {
         private string saltKeyFile = ".SaltKey.dat"; // hardcoded to default placement, for simplicity
 
