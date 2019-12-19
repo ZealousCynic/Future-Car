@@ -89,6 +89,11 @@ namespace WebAPI.Controllers
         {
             bool validated = false;
 
+            using(DAL.UserRepository repo = new DAL.UserRepository())
+            {
+                validated = repo.
+            }
+
             if (validated)
                 return Ok();
             return BadRequest();
