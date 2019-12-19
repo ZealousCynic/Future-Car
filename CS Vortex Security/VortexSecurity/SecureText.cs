@@ -11,7 +11,7 @@ namespace VortexSecurity
     /// <summary>
     /// Used to enccrypt and decrypt text using RSACryptoServiceProvider
     /// </summary>
-    class SecureText
+    public class SecureText : IDisposable
     {
         private string privatePath, publicPath, privateKey;
         private int keysize;
@@ -59,6 +59,10 @@ namespace VortexSecurity
             }
             string decryptedString = Encoding.UTF8.GetString(decryptedBytes);
             return decryptedString;
+        }
+
+        public void Dispose()
+        {
         }
 
         /// <summary>

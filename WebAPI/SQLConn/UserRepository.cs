@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class UserRepository : SQLRepository<User>
+    public class UserRepository : SQLRepository<User>, IUserRepository<User>
     {
 
         public UserRepository()
@@ -24,15 +26,46 @@ namespace DAL
 
         }
 
+        public bool AuthenticateUser(User entity)
+        {
+            CmdText = "AuthenticateUser";
+            Cmd.Connection = Connection;
+            Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            Cmd.Parameters.AddRange(
+                new[] {
+                    new SqlParameter("Username", entity.Username),
+                    new SqlParameter("Password", entity.Password)
+                    }
+                );
+
+            SqlDataReader reader = Cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                reader.Read();
+                return (bool)reader.GetValue(0);
+            }
+
+            Debug.WriteLine("Default false");
+            return false;
+        }
+
         public override void Create(User entity)
         {
-            CmdText = $"INSERT INTO [User] (Username, Password) VALUES ('{entity.Username}', '{entity.Password}')";
+            CmdText = "InsertUser";
 
             Cmd.Connection = Connection;
             Cmd.CommandText = CmdText;
-            
+
             //TEMPORARY
-            Cmd.CommandType = System.Data.CommandType.Text;
+            Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            Cmd.Parameters.AddRange(
+                new[] {
+                    new SqlParameter("Username", entity.Username),
+                    new SqlParameter("Password", entity.Password)
+                    }
+                );
 
             Cmd.Connection.Open();
             Cmd.ExecuteNonQuery();
