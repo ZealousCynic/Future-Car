@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class UserRepository : SQLRepository<User>
+    public class UserRepository : SQLRepository<User>, IUserRepository<User>
     {
 
         public UserRepository()
@@ -22,6 +22,11 @@ namespace DAL
         public UserRepository(string _conn, string username, System.Security.SecureString password) : base(_conn, username, password)
         {
 
+        }
+
+        public bool AuthenticateUser(User entity)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Create(User entity)
