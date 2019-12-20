@@ -60,7 +60,6 @@ namespace DAL
             Cmd.Connection = Connection;
             Cmd.CommandText = CmdText;
 
-            //TEMPORARY
             Cmd.CommandType = System.Data.CommandType.StoredProcedure;
             Cmd.Parameters.AddRange(
                 new[] {
