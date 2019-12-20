@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class UserController : ApiController
     {
         User[] users;
-        VortexSecurity.Salt salty = new VortexSecurity.Salt();
+        string _con = Connection.GetConnection();
 
         public UserController()
         {
@@ -35,38 +35,7 @@ namespace WebAPI.Controllers
             users = new User[] { u };
         }
 
-        [HttpGet]
-        public IEnumerable<User> GetAllUsers()
-        {
-            return users;
-        }
-
-        [HttpGet]
-        public IHttpActionResult GetUser(int id)
-        {
-            User u = users.FirstOrDefault(delegate (User _u) { return _u.UserId == id; });
-
-            if (u == null)
-                return NotFound();
-
-            string salt = salty.Hash(users[id].Username, users[id].Password);
-
-            Debug.WriteLine(salt);
-            Debug.WriteLine(salt.Length);
-
-            return Ok(u);
-        }
-
-        [HttpPost]
-        public IHttpActionResult CreateUser(User u)
-        {
-            using (DAL.UserRepository repo = new DAL.UserRepository())
-            {
-                repo.Create(UserConverter.ConvertFrom_NoID(u));
-            }
-            return Ok();
-        }
-
+        #region TESTDBCON
         /// <summary>
         /// Dummy, for testing DB connection.
         /// </summary>
@@ -84,14 +53,49 @@ namespace WebAPI.Controllers
             }
             return Ok(users[2]);
         }
+        #endregion
+
+        [HttpGet]
+        public IEnumerable<User> GetAllUsers()
+        {
+            User[] toReturn;
+
+             using(DAL.UserRepository repo = new DAL.UserRepository(_con)) { toReturn = UserConverter.ConvertTo(repo.GetAll()); }
+
+            return toReturn;
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetUser(int id)
+        {
+            User u = null;
+
+            using(DAL.UserRepository repo = new DAL.UserRepository(_con)) { u = UserConverter.ConvertTo(repo.GetById(id)); }
+
+            if (u == null)
+                return NotFound();
+
+            return Ok(u);
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateUser(User u)
+        {
+            using (DAL.UserRepository repo = new DAL.UserRepository(_con))
+            {
+                repo.Create(UserConverter.ConvertFrom_NoID(u));
+            }
+            return Ok();
+        }
+
 
         public IHttpActionResult AuthenticateUser(User u)
         {
             bool validated = false;
 
-            using(DAL.UserRepository repo = new DAL.UserRepository())
+            using(DAL.UserRepository repo = new DAL.UserRepository(_con))
             {
-                validated = repo.
+                validated = repo.AuthenticateUser(UserConverter.ConvertFrom_NoID(u));
             }
 
             if (validated)

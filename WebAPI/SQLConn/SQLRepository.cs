@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.Sql;
 using System.Data.SqlClient;
 using System.Security;
+using System.Diagnostics;
 
 namespace DAL
 {
@@ -21,7 +22,7 @@ namespace DAL
         string defaultConnection = "Server=10.108.233.52;" +
                 "Initial Catalog=VortexDB;" +
                 "User Id=sqladmin;" +
-                "Password =Pa$$w0rd;";
+                "Password =Pa$$w0rd;";        
 
         protected SqlConnection Connection { get { return con; } set { con = value; } }
         protected SqlCommand Cmd { get { return cmd; } set { cmd = value; } }

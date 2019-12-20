@@ -28,31 +28,29 @@ namespace DAL
 
         public bool AuthenticateUser(User entity)
         {
-<<<<<<< HEAD
-            throw new NotImplementedException();
-=======
             CmdText = "AuthenticateUser";
+
             Cmd.Connection = Connection;
+            Cmd.CommandText = CmdText;
+
             Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            SqlParameter authorized = new SqlParameter("@Authorized", System.Data.SqlDbType.Bit);
+            authorized.Direction = System.Data.ParameterDirection.Output;
 
             Cmd.Parameters.AddRange(
                 new[] {
-                    new SqlParameter("Username", entity.Username),
-                    new SqlParameter("Password", entity.Password)
+                    new SqlParameter("@Username", entity.Username),
+                    new SqlParameter("@Password", entity.Password),
+                    authorized
                     }
                 );
 
-            SqlDataReader reader = Cmd.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                reader.Read();
-                return (bool)reader.GetValue(0);
-            }
-
-            Debug.WriteLine("Default false");
+            Cmd.Connection.Open();
+            Cmd.ExecuteNonQuery();
+            if (authorized.Value != null)
+                return (bool)authorized.Value;
             return false;
->>>>>>> 9003e6b56410fc0aace0e988a2e9b66889f69988
         }
 
         public override void Create(User entity)
@@ -82,7 +80,29 @@ namespace DAL
 
         public override User[] GetAll()
         {
-            throw new NotImplementedException();
+            CmdText = "GetAllUsers";
+
+            Cmd.Connection = Connection;
+            Cmd.CommandText = CmdText;
+
+            Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            Cmd.Connection.Open();
+            SqlDataReader reader = Cmd.ExecuteReader();
+
+            List<User> toReturn = new List<User>();
+
+            if(reader.HasRows)                
+                while(reader.Read())
+                {
+                    toReturn.Add(new User
+                    {
+                        ID = (int)reader.GetValue(0),
+                        Username = reader.GetString(1),
+                        Password = reader.GetString(2)
+                    });
+                }
+            return toReturn.ToArray();
         }
 
         public override User GetById(int id)
