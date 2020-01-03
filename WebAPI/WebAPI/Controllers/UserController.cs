@@ -16,14 +16,22 @@ namespace WebAPI.Controllers
 
         public UserController()
         {
-            users = new User[] {
+            users = GetAllUsers().ToArray();
+
+            if (users == null)
+            {
+                Debug.WriteLine("DEBUG DATA");
+
+                users = new User[] {
                 new User { UserId = 0, Username = "John", Password = "LemonJuice" },
                 new User { UserId = 1, Username = "Marge", Password = "notSimpson" },
                 new User {UserId = 2, Username = "Carl", Password = "MurderLlama"},
                 new User {UserId = 3, Username = "Timmy", Password = "T-t-timmy"},
                 new User {UserId = 4, Username = "Bill", Password = "Portculis"},
-                new User {UserId = 5, Username = "Steve", Password = "Jobless"}
+                new User {UserId = 5, Username = "Steve", Password = "Jobless"},
+                new User {UserId = 99, Username = "DEBUGDATA", Password = "Jobless"}
             };
+            }
         }
         public UserController(User[] _users)
         {
@@ -60,7 +68,7 @@ namespace WebAPI.Controllers
         {
             User[] toReturn;
 
-             using(DAL.UserRepository repo = new DAL.UserRepository(_con)) { toReturn = UserConverter.ConvertTo(repo.GetAll()); }
+            using (DAL.UserRepository repo = new DAL.UserRepository(_con)) { toReturn = UserConverter.ConvertTo(repo.GetAll()); }
 
             return toReturn;
         }
@@ -70,7 +78,7 @@ namespace WebAPI.Controllers
         {
             User u = null;
 
-            using(DAL.UserRepository repo = new DAL.UserRepository(_con)) { u = UserConverter.ConvertTo(repo.GetById(id)); }
+            using (DAL.UserRepository repo = new DAL.UserRepository(_con)) { u = UserConverter.ConvertTo(repo.GetById(id)); }
 
             if (u == null)
                 return NotFound();
@@ -93,7 +101,7 @@ namespace WebAPI.Controllers
         {
             bool validated = false;
 
-            using(DAL.UserRepository repo = new DAL.UserRepository(_con))
+            using (DAL.UserRepository repo = new DAL.UserRepository(_con))
             {
                 validated = repo.AuthenticateUser(UserConverter.ConvertFrom_NoID(u));
             }

@@ -51,6 +51,7 @@
     <Compile Include="SQLConnectionException.cs" />
     <Compile Include="SQLRepository.cs" />
     <Compile Include="Statistic.cs" />
+    <Compile Include="StatisticRepository.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>

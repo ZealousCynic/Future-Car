@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class StatisticRepository : SQLRepository<Statistic>
+    public class StatisticRepository : SQLRepository<Statistic>
     {
         public override void Create(Statistic entity)
         {
