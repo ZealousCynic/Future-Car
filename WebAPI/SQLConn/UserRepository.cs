@@ -106,7 +106,30 @@ namespace DAL
 
         public override User GetById(int id)
         {
-            throw new NotImplementedException();
+            CmdText = "GetUserById";
+
+            Cmd.Connection = Connection;
+            Cmd.CommandText = CmdText;
+
+            Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            Cmd.Parameters.Add(new SqlParameter("@getId", id));
+
+
+            Cmd.Connection.Open();
+            SqlDataReader reader = Cmd.ExecuteReader();
+
+            User toReturn = null;
+
+            if (reader.HasRows)
+                reader.Read();
+                    toReturn = new User
+                    {
+                        ID = (int)reader.GetValue(0),
+                        Username = reader.GetString(1),
+                        Password = reader.GetString(2)
+                    };
+            return toReturn;
         }
 
         public override void Update(User entity)
