@@ -1,20 +1,35 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import {Observable, of} from 'rxjs'
-import {map } from 'rxjs/operators';
-import {IUser} from '../IUser';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http'
+import { Observable, of, throwError, from } from 'rxjs'
+import { map } from 'rxjs/operators';
+import { IUser } from '../IUser';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http:HttpClient) { }
+	url: string;
+	user: IUser;
 
-  configUrl = 'http://localhost:3797/api/login/'
+	constructor(private http: HttpClient) {
 
-  login(user:IUser) {
+		// API URL
+		this.url = 'http://localhost:3797/api/login/';
+	}
 
-    return this.http.post(this.configUrl + 'login', user);
-  }
+	login(username: string, password: string) {
+		this.user = {
+			UserId: 0,
+			Username: username,
+			Password: password
+		};
+
+		console.log(this.user);
+
+		return this.http.post(this.url + 'login', this.user).subscribe({
+			next: data => console.log(data),
+			error: error => console.error('There was an error!', error)
+		})
+	}
 }

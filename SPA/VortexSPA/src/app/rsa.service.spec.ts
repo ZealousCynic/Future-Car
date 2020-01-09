@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UserService } from './user.service';
+import { RsaService } from './rsa.service';
 
-describe('UserService', () => {
+describe('RsaService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: UserService = TestBed.get(UserService);
+    const service: RsaService = TestBed.get(RsaService);
     expect(service).toBeTruthy();
   });
 });
