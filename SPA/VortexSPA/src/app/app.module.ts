@@ -9,6 +9,9 @@ import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OverviewComponent } from './components/overview/overview.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from './user.service';
+import { LoginService } from './login.service'
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { OverviewComponent } from './components/overview/overview.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
@@ -25,7 +29,7 @@ import { OverviewComponent } from './components/overview/overview.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [UserService, LoginService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
