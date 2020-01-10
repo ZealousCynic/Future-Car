@@ -30,7 +30,8 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t* payload, size_t length)
       case WStype_DISCONNECTED:
           break;
       case WStype_CONNECTED:
-          IPAddress ip = webSocket.remoteIP(num);
+      {
+          IPAddress ip = webSocket.remoteIP(num);}
           break;
       case WStype_TEXT:
           // handle incoming payload
