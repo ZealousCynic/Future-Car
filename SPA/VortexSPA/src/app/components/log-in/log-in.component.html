@@ -5,7 +5,7 @@
         <mat-card-title>Log in</mat-card-title>
       </mat-card-header>
 
-      <form [formGroup]="loginData" (ngSubmit)="onLoginSubmit()" class="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
         <mat-card-content>
           <mat-form-field class="login-full-width">
             <input matInput formControlName="username" placeholder="Username" />
@@ -15,7 +15,11 @@
             <input type="password" matInput formControlName="password" placeholder="Password" />
           </mat-form-field>
         </mat-card-content>
-        <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+        <button mat-stroked-button color="accent" [disabled]="loadings" class="btn-block">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Log in
+        </button>
+        <div *ngIf="error">{{error}}</div>
       </form>
     </mat-card>
   </div>

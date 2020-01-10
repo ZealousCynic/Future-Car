@@ -9,9 +9,9 @@ import { AngularMaterialModule } from './angular-material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { OverviewComponent } from './components/overview/overview.component';
-import { HttpClientModule } from '@angular/common/http';
-import { UserService } from './user.service';
-import { LoginService } from './login.service'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './jwt.interceptor';
+import { ErrorInterceptor } from './error.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,11 @@ import { LoginService } from './login.service'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, LoginService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

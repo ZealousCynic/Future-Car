@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsService } from 'src/app/statistics.service';
+import { Statistics } from 'src/app/statistics';
 
 @Component({
   selector: 'app-overview',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
+  statistics: Statistics;
 
-  constructor() { }
-
+  constructor(private statisticsService: StatisticsService) { }
+  
   ngOnInit() {
+    this.statisticsService.getVortexIdByUserId();
   }
-
 }
