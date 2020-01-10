@@ -21,9 +21,9 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 #define STAPSK  "skodLinksys"
 #endif
 
-uint8_t* testVals;
-uint8_t toSend[2] = {51, 48};
-uint8_t change[2] = {50, 50};
+// uint8_t* testVals;
+// uint8_t toSend[2] = {51, 48};
+// uint8_t change[2] = {50, 50};
 
 const char* ssid = STASSID;
 const char* ssid_password = STAPSK;
@@ -45,7 +45,7 @@ void webSocketEvent(uint8_t num, WStype_t type, uint8_t* payload, size_t length)
 
 void setup()
 {
-    initTestVals();
+    // initTestVals();
   
     WiFiMulti.addAP(ssid, ssid_password);
     while (WiFiMulti.run() != WL_CONNECTED)
@@ -82,3 +82,4 @@ void initTestVals() {
   *testVals = 50;
   *(testVals + 1) = 49;
   }
+
