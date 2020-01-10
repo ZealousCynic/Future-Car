@@ -1,0 +1,26 @@
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+mat-toolbar {
+  background: #85C9E2;
+  color: #FFFFFF;
+
+  mat-icon {
+    color: #0B93C5;
+  }
+}
+
+.menu-spacer {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+#title {
+  margin-right: 1rem;
+}

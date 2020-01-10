@@ -1,0 +1,53 @@
+h4, h3 {
+    color: #707070;
+}
+
+p {
+    color: #467789;
+}
+
+#user-info {
+    h4 {
+        margin-top: -0.5rem;
+        margin-right: 0.5rem;
+    
+        &:first-child {
+            margin-top: 2rem;
+        }
+    }
+    
+    p {
+        margin-top: -0.17rem;
+        margin-left: 0.5rem;
+    
+        &:first-child {
+            margin-top: 2rem;
+        }
+    }
+}
+
+#status-one, #status-two, #status-three {
+    h3 {
+        font-size: x-large;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        font-size: larger;
+    }
+}
+
+#status-two {
+    margin-top: -14rem;
+}
+
+#status-three {
+    margin-top: -18rem;
+}
+
+
+#map {
+    height: 25rem;
+    margin-left: 8rem;
+    margin-top: 1rem;
+}

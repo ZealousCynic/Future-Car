@@ -1,0 +1,30 @@
+<div *ngIf="currentUser">
+  <mat-toolbar>
+    <button mat-icon-button>
+      <mat-icon>apps</mat-icon>
+    </button>
+    <h1 id="title">Vortex</h1>
+    <h2>YK 18 134</h2>
+    <button mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/overview'"> Oversigt </a>
+      <a mat-button [routerLink]="'/create-account'"> Tildel adgang </a>
+      <button mat-button [matMenuTriggerFor]="menu">
+        Statistik <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-button [routerLink]="'/create-account'"> Tilstand </a>
+        <br />
+        <a mat-button [routerLink]="'/create-account'"> Sensor </a>
+        <br />
+        <a mat-button [routerLink]="'/create-account'"> Strøm </a>
+      </mat-menu>
+      <a mat-button (click)="logout()"> Log ud </a>
+    </div>
+  </mat-toolbar>
+</div>
+
+<router-outlet></router-outlet>
