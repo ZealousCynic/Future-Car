@@ -8,5 +8,14 @@ namespace UTWebAPI
 {
     class UTLoginController
     {
+        void UTLoginShouldSucceed()
+        {
+
+        }
+
+        void UTLoginShouldFail()
+        {
+
+        }
     }
 }
