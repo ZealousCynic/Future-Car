@@ -12,7 +12,7 @@ namespace UTWebAPI
     public class UTLoginController
     {
         [Fact]
-        void UTLoginShouldSucceed()
+        public void UTLoginShouldSucceed()
         {
             WebAPI.Controllers.LoginController c = new WebAPI.Controllers.LoginController();
 
@@ -28,7 +28,7 @@ namespace UTWebAPI
         }
 
         [Fact]
-        void UTLoginShouldFail()
+        public void UTLoginShouldFail()
         {
             WebAPI.Controllers.LoginController c = new WebAPI.Controllers.LoginController();
 

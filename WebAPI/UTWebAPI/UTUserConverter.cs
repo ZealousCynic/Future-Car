@@ -11,7 +11,7 @@ namespace UTWebAPI
     {
         [Theory]
         [InlineData(0, "Bob", "Askepot")]
-        void UTConvertFromShouldSucceed(int id, string username, string password)
+        public void UTConvertFromShouldSucceed(int id, string username, string password)
         {
             WebAPI.Models.User u = new WebAPI.Models.User();
 

@@ -6,6 +6,7 @@
 byte* toParsePtr;
 byte* ESPtoParsePtr;
 size_t len;
+ReadingSet* toSend;
 
 bool readingFlag;
 bool espReceived;
@@ -51,7 +52,11 @@ delay(500);
 
   //Have we received bytes?
   if (readingFlag)
-    getReading();
+  {
+    GetI2CReading();
+    sendToSerial();
+  }
+    
 }
 
 byte * getArray(int size) {
@@ -118,9 +123,19 @@ void GetI2CReading() {
 
   free(toParsePtr);
 
-  ReadingSet* toSend = getReading();
+  toSend = getReading();
   initReading(toSend, temperature, compas, waterlevel, power, state);
 
   //This should be done only when reading is no longer needed
+  
+}
+
+void sendToSerial() {
+  Serial.write(toSend->temperature);
+  Serial.write(toSend->compas);
+  Serial.write(toSend->waterlevel);
+  Serial.write(toSend->power);
+  Serial.write(toSend->state);
+
   free(toSend);
 }
