@@ -131,6 +131,11 @@ void GetI2CReading() {
 }
 
 void sendToSerial() {
-  Serial.print(toSend->temperature);
+  Serial.write(toSend->temperature);
+  Serial.write(toSend->compas);
+  Serial.write(toSend->waterlevel);
+  Serial.write(toSend->power);
+  Serial.write(toSend->state);
+
   free(toSend);
 }
