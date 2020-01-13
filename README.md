@@ -17,7 +17,7 @@ Hovedansvarlig: **H3**
     - [x] Form
     - [x] Secure login **H4**
     - [x] Routing
-    - [ ] Unit tests
+    - [x] Unit tests
 
 Hovedansvarlig: **H3**
 - [x] Arduino

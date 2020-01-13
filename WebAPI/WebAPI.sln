@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VortexSecurity", "..\CS Vor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "SQLConn\DAL.csproj", "{EDCEE804-2E23-48D6-9C6A-F109EE1E1037}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTWebAPI", "UTWebAPI\UTWebAPI.csproj", "{A7E8C049-0AE9-4097-97E3-41AD1FC11D9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EDCEE804-2E23-48D6-9C6A-F109EE1E1037}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDCEE804-2E23-48D6-9C6A-F109EE1E1037}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDCEE804-2E23-48D6-9C6A-F109EE1E1037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E8C049-0AE9-4097-97E3-41AD1FC11D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E8C049-0AE9-4097-97E3-41AD1FC11D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E8C049-0AE9-4097-97E3-41AD1FC11D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E8C049-0AE9-4097-97E3-41AD1FC11D9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

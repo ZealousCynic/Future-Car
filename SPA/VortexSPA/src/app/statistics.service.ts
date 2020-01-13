@@ -4,6 +4,7 @@ import { AuthenticationService } from './authentication.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
+import { Statistics } from './statistics';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,16 @@ export class StatisticsService {
    }
 
    getLatest() {
-     return this.http.get(`${environment.apiUrl}/Statistic/GetLatestById?id=${this.currentUser.VortexId}`);
+     return this.http.get(`${environment.apiUrl}/Statistic/GetLatestById?id=${JSON.parse(localStorage.getItem('VortexId'))}`)
+     .subscribe(statistics => {
+       localStorage.setItem('Statistics', JSON.stringify(statistics));
+     })
    }
 
    getVortexIdByUserId() {
-     return this.http.get(`${environment.apiUrl}/User/GetVortexId?userId=${this.currentUser.UserId}`);
+     return this.http.get(`${environment.apiUrl}/User/GetVortexId?userId=${this.currentUser.UserId}`)
+     .subscribe(vortexId => {
+       localStorage.setItem('VortexId', JSON.stringify(vortexId));
+     })
    }
 }
