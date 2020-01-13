@@ -39,11 +39,11 @@
         <div fxFlex="50%" id="status-one">
             <div fxFlex="50%" fxLayout="column" fxLayoutAlign="center center">
                 <h3>Tilstand</h3>
-                <p>Vand Mode</p>
+                <p>{{statistics.DriveState | boolToText:'mode'}}</p>
             </div>
             <div fxFlex="50%" fxLayout="column" fxLayoutAlign="center center">
                 <h3>Vandstand</h3>
-                <p>35cm</p>
+                <p>{{statistics.WaterLevel}}cm</p>
             </div>
         </div>
     </div>
@@ -55,11 +55,11 @@
         <div fxFlex="50%" id="status-two">
             <div fxFlex="50%" fxLayout="column" fxLayoutAlign="center center">
                 <h3>Kompasretning</h3>
-                <p>284°</p>
+                <p>{{statistics.Compas}}°</p>
             </div>
             <div fxFlex="50%" fxLayout="column" fxLayoutAlign="center center">
                 <h3>Temperatur</h3>
-                <p>3°C</p>
+                <p>{{statistics.Temperature}}°C</p>
             </div>
         </div>
     </div>
@@ -67,8 +67,8 @@
     <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxFlex="50%" fxFlexOffset="50%" id="status-three">
             <div fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
-                <h3>Tilstand</h3>
-                <p>I Går</p>
+                <h3>Strøm</h3>
+                <p>{{statistics.PowerState | boolToText:'power'}}</p>
             </div>
         </div>
     </div>

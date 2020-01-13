@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/authentication.service';
 import { first } from 'rxjs/operators';
+import { StatisticsService } from 'src/app/statistics.service';
 
 
 @Component({
@@ -17,7 +18,11 @@ export class LogInComponent implements OnInit {
 	returnUrl: string;
 	error = '';
 
-	constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService) {
+	constructor(private formBuilder: FormBuilder, 
+		private route: ActivatedRoute, 
+		private router: Router, 
+		private authenticationService: AuthenticationService,
+		private statisticsService: StatisticsService) {
 		if (authenticationService.currentUserValue) {
 			router.navigate(['/']);
 		}
