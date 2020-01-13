@@ -12,12 +12,16 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './jwt.interceptor';
 import { ErrorInterceptor } from './error.interceptor';
+import { BoolToTextPipe } from "./bool-to-text.pipe";
+import { StatisticsComponent } from "./components/statistics/statistics.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    OverviewComponent
+    OverviewComponent,
+    StatisticsComponent,
+    BoolToTextPipe
   ],
   imports: [
     BrowserModule,
