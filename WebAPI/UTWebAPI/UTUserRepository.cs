@@ -17,6 +17,7 @@ namespace UTWebAPI
             u.Username = "Bob";
             u.Password = "424242";
 
+            //This should have been mocked for the test to actually work.
             using (DAL.UserRepository repo = new DAL.UserRepository())
             {
                 repo.Create(UserConverter.ConvertFrom_NoID(u));
@@ -31,6 +32,7 @@ namespace UTWebAPI
             u.Username = "Bob";
             u.Password = "424242";
 
+            //This should have been mocked for the test to actually work.
             using (DAL.UserRepository repo = new DAL.UserRepository(connection))
             {
                 repo.Create(UserConverter.ConvertFrom_NoID(u));
