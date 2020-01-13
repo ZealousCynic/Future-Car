@@ -11,7 +11,7 @@ namespace UTWebAPI
     public class UTUserRepository
     {
         [Fact]
-        void UTCreateNewUserShouldSucceed()
+        public void UTCreateNewUserShouldSucceed()
         {
             WebAPI.Models.User u = new WebAPI.Models.User();
             u.Username = "Bob";
@@ -25,7 +25,7 @@ namespace UTWebAPI
 
         [Theory]
         [InlineData("INVALIDSTRING")]
-        void UTCreateNewUserShouldFail(string connection)
+        public void UTCreateNewUserShouldFail(string connection)
         {
             WebAPI.Models.User u = new WebAPI.Models.User();
             u.Username = "Bob";

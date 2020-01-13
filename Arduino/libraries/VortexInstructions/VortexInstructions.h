@@ -5,8 +5,8 @@ typedef enum _V_Instruction {
 } VortexInstruction;
 
 typedef enum _V_State {
-	LAND = 1,
-	WATER = 2
+	LAND = 0,
+	WATER = 1
 } VortexState;
 
 typedef enum _Stepper_Operation {
