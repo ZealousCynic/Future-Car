@@ -14,25 +14,25 @@ Hovedansvarlig: **H4**
 Hovedansvarlig: **H3**
 - [ ] Angular SPA
     
-    - [ ] Form
-    - [ ] Secure login **H4**
-    - [ ] Routing
-    - [ ] Unit tests
+    - [x] Form
+    - [x] Secure login **H4**
+    - [x] Routing
+    - [x] Unit tests
 
 Hovedansvarlig: **H3**
-- [ ] Arduino
+- [x] Arduino
 
-    - [ ] One or more sensors
-    - [ ] Web Socket **H4**
+    - [x] One or more sensors
+    - [x] Web Socket **H4**
     - You don't unit test code for embedded controllers
 
 Hovedansvarlig: **Everybody**
 - [ ] Backend
     
-    - [ ] Web API
+    - [x] Web API
     - [ ] Web Socket
-    - [ ] Encryption
-    - [ ] Decryption
-    - [ ] Salting
-    - [ ] SQL Parameter safety
-    - [ ] ORM / ADO.NET Data access
+    - [x] Encryption
+    - [x] Decryption
+    - [x] Salting
+    - [x] SQL Parameter safety
+    - [x] ORM / ADO.NET Data access

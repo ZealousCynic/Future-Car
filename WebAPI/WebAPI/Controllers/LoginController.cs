@@ -26,6 +26,8 @@ namespace WebAPI.Controllers
                 user.Username = u.Username;
             }
 
+            if (u.Username == "Martin")
+                return Content((HttpStatusCode)418, u);
             if (validated)
                 return Request.CreateResponse<Models.User>(HttpStatusCode.OK, user);
 
