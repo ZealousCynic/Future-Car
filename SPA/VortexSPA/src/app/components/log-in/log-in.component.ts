@@ -5,7 +5,6 @@ import { AuthenticationService } from 'src/app/authentication.service';
 import { first } from 'rxjs/operators';
 import { StatisticsService } from 'src/app/statistics.service';
 
-
 @Component({
 	selector: 'app-log-in',
 	templateUrl: './log-in.component.html',
@@ -17,6 +16,7 @@ export class LogInComponent implements OnInit {
 	submitted = false;
 	returnUrl: string;
 	error = '';
+	execPath = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
 
 	constructor(private formBuilder: FormBuilder, 
 		private route: ActivatedRoute, 

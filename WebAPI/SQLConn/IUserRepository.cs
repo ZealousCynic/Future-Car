@@ -9,6 +9,6 @@ namespace DAL
     interface IUserRepository<T>
         where T : BaseEntity
     {
-        bool AuthenticateUser(T entity);
+        (bool authorized, int userId) AuthenticateUser(T entity);
     }
 }
