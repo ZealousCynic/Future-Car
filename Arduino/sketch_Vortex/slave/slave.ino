@@ -11,7 +11,9 @@ ServoOperation servoOp = S_NEUTRAL;
 StepperOperation stepperOp = S_OFF;
 PumpOperation pumpOp = P_OFF;
 ValveOperation valveOp = V_NEUTRAL;
-VortexState state = LAND;
+//VortexState state = LAND;
+
+bool state = 0;
 
 const int TPIN = 0; //Temperature Pin
 const int WPIN = 1; //WaterLevel Pin
@@ -52,7 +54,7 @@ void loop() {
   if (power) {
 
     //State == true == Land based movement
-    if (state) {
+    if (!state) {
       stepperOperation(stepperOp);
       servoOperation(servoOp);
     }
@@ -111,10 +113,7 @@ void evaluateReceived() {
       turn();
       break;
     case 4:
-      if (state = LAND)
-        state = WATER;
-      else
-        state = LAND;
+      state = !state;
       break;
     case 5:
       sendReadingSet();
@@ -180,23 +179,17 @@ void sendReadingSet() {
 }
 
 void drive() {
-  switch (state) {
-    case LAND:
-      stepperOp = (*(recPtr + 1));
-      break;
-    case WATER:
-      pumpOp = (*(recPtr + 1));
-  }
+  if (state)
+    stepperOp = (*(recPtr + 1));
+  else
+    pumpOp = (*(recPtr + 1));
 }
 
 void turn() {
-  switch (state) {
-    case LAND:
-      turnServo();
-      break;
-    case WATER:
-      turnValve();
-  }
+  if (state)
+    turnServo();
+  else
+    turnValve();
 }
 
 void turnServo() {

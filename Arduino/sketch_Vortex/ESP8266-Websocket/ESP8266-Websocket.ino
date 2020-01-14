@@ -59,7 +59,9 @@ void setup()
 void loop() {
   webSocket.loop();
 
-  if (Serial.available() > 0) {
+//int, int, int, bool, enum =
+// 2 + 2 + 2 + 1 + 2
+  if (Serial.available() >= 5) {
     serialReceived();
   }
 }
@@ -79,12 +81,33 @@ void serialReceived() {
   //this bungles whatever we get, but we can read the last 2 bytes (booleans) correctly
   while (acc < len) {
     *(receivedBuffer + acc) = Serial.read();
-    *(receivedBuffer + acc) += 48;
     acc++;
   }
+  acc = 0;
 
-  //String message = String((char * ) &receivedBuffer[0]);
-  webSocket.broadcastTXT(receivedBuffer, len);
+  //I really need to look into actual serialization/deserialization of a struct.
+  int temperature = (int)*(receivedBuffer + acc);  
+  acc += 2;
+  int compas = (int)*(receivedBuffer + acc);
+  acc += 2;
+  int waterlevel = (int)*(receivedBuffer + acc);
+  acc += 2;
+  bool power = (bool)*(receivedBuffer + acc);
+  acc++;
+  bool state = (bool)*(receivedBuffer + acc);
 
+  String message;
+  message += "T ";
+  message += temperature;
+  message += " C: ";
+  message += compas;
+  message += " W: ";
+  message += waterlevel;
+  message += " P: ";
+  message += power;
+  message += " S: ";
+  message += state;
+  webSocket.broadcastTXT(message);
+  
   free(receivedBuffer);
 }
