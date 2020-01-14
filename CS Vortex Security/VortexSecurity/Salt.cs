@@ -13,7 +13,7 @@ namespace VortexSecurity
     /// </summary>
     public class Salt : IDisposable
     {
-        private string saltKeyFile = ".SaltKey.dat"; // hardcoded to default placement, for simplicity
+        private string saltKeyFile = "SaltKey.dat"; // hardcoded to default placement, for simplicity
 
         /// <summary>
         /// Hashing (salting) a password before transmission and storage
