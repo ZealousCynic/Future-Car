@@ -9,7 +9,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 const routes: Routes = [
   { path:'', component: OverviewComponent, canActivate: [AuthGuard] },
   { path:'login', component: LogInComponent },
-  { path:'statistics', component: StatisticsComponent },
+  { path:'statistics/:type', component: StatisticsComponent },
   { path: '**', redirectTo: '' }
 ];
 

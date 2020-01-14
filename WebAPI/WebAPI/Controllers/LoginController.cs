@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -11,17 +13,23 @@ namespace WebAPI.Controllers
     public class LoginController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Login(Models.User u)
+        public HttpResponseMessage Login(Models.User u)
         {
             bool validated = false;
-            using(DAL.UserRepository repo = new DAL.UserRepository())
+            Models.User user = new Models.User();
+            using (DAL.UserRepository repo = new DAL.UserRepository(Connection.GetConnection()))
             {
-                validated = repo.AuthenticateUser(UserConverter.ConvertFrom(u));
+                var result = repo.AuthenticateUser(UserConverter.ConvertFrom(u));
+                validated = result.authorized;
+
+                user.UserId = result.userId;
+                user.Username = u.Username;
             }
 
             if (validated)
-                return Ok();
-            return NotFound();
+                return Request.CreateResponse<Models.User>(HttpStatusCode.OK, user);
+
+            return Request.CreateResponse<string>(HttpStatusCode.NotFound, "User not found");
         }
     }
 }

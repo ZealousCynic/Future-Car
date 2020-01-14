@@ -55,5 +55,8 @@
     <Compile Include="User.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DALClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -105,12 +105,25 @@ namespace WebAPI.Controllers
 
             using (DAL.UserRepository repo = new DAL.UserRepository(_con))
             {
-                validated = repo.AuthenticateUser(UserConverter.ConvertFrom_NoID(u));
+                var result = repo.AuthenticateUser(UserConverter.ConvertFrom_NoID(u));
+                validated = result.authorized;
             }
 
             if (validated)
                 return Ok(validated);
             return BadRequest();
+        }
+
+        public HttpResponseMessage GetVortexId(int userId)
+        {
+            using (DAL.UserRepository repo = new DAL.UserRepository(_con))
+            {
+                int vortexId = repo.GetVortxIdByUserId(userId);
+
+                if (vortexId != 0)
+                    return Request.CreateResponse(HttpStatusCode.OK, vortexId);
+                return Request.CreateResponse(HttpStatusCode.NotFound, vortexId);
+            }
         }
     }
 }

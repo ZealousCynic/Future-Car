@@ -26,7 +26,7 @@ namespace DAL
 
         }
 
-        public bool AuthenticateUser(User entity)
+        public (bool authorized, int userId) AuthenticateUser(User entity)
         {
             CmdText = "AuthenticateUser";
 
@@ -37,20 +37,23 @@ namespace DAL
 
             SqlParameter authorized = new SqlParameter("@Authorized", System.Data.SqlDbType.Bit);
             authorized.Direction = System.Data.ParameterDirection.Output;
+            SqlParameter userId = new SqlParameter("@UserId", System.Data.SqlDbType.Int);
+            userId.Direction = System.Data.ParameterDirection.Output;
 
             Cmd.Parameters.AddRange(
                 new[] {
                     new SqlParameter("@Username", entity.Username),
                     new SqlParameter("@Password", entity.Password),
-                    authorized
+                    authorized,
+                    userId
                     }
                 );
 
             Cmd.Connection.Open();
             Cmd.ExecuteNonQuery();
             if (authorized.Value != null)
-                return (bool)authorized.Value;
-            return false;
+                return ((bool)authorized.Value, int.Parse(userId.Value.ToString()));
+            return (false, 0);
         }
 
         public override void Create(User entity)
@@ -135,6 +138,32 @@ namespace DAL
         public override void Update(User entity)
         {
             throw new NotImplementedException();
+        }
+
+        public int GetVortxIdByUserId(int userId)
+        {
+            CmdText = "GetVortexIdByUser";
+
+            Cmd.Connection = Connection;
+            Cmd.CommandText = CmdText;
+
+            Cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            SqlParameter vortexId = new SqlParameter("@VortexId", System.Data.SqlDbType.Int);
+            vortexId.Direction = System.Data.ParameterDirection.Output;
+
+            Cmd.Parameters.AddRange(
+                new[] {
+                    new SqlParameter("@UserId", userId),
+                    vortexId
+                    }
+                );
+
+            Cmd.Connection.Open();
+            Cmd.ExecuteNonQuery();
+            if (vortexId.Value != null)
+                return int.Parse(vortexId.Value.ToString());
+            return 0;
         }
     }
 }

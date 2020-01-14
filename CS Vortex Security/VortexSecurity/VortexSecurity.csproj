@@ -46,5 +46,8 @@
     <Compile Include="Salt.cs" />
     <Compile Include="SecureText.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="SecurityClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
